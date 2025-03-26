@@ -1,0 +1,101 @@
+<section class="bg-base-200 lg:my-5 lg:mx-15">
+  <h1>
+    <legend class="fieldset-legend justify-center">Usuario</legend>
+  </h1>
+  <form class="flex flex-row gap-4 items-start justify-center pb-4 pt-2" [formGroup]="userForm"
+        (ngSubmit)="onSubmit(userForm.value.userName!,userForm.value.tagLine!)">
+
+    <div class="flex flex-col">
+      <label class="fieldset-label">Nombre de usuario</label>
+      <input
+        type="text"
+        class="input"
+        placeholder="Ej: CTNL Germoyo"
+        formControlName="userName"
+        [class.border-red-500]="formUtils.isValidField('userName',userForm)"
+      />
+      @if (formUtils.isValidField('userName', userForm)) {
+        <span class="form-text text-secondary">{{ formUtils.getFieldError('userName', userForm) }}</span>
+      }
+    </div>
+    <div class="flex flex-col">
+      <label class="fieldset-label">Tag</label>
+      <input
+        type="text"
+        class="input"
+        placeholder="Ej: CTNL"
+        formControlName="tagLine"
+        [class.border-red-500]="formUtils.isValidField('tagLine',userForm)"
+      />
+      @if (formUtils.isValidField('tagLine', userForm)) {
+        <span class="form-text text-secondary">{{ formUtils.getFieldError('tagLine', userForm) }}</span>
+      }
+    </div>
+
+    <button class="btn btn-accent mt-5">Buscar</button>
+  </form>
+</section>
+
+@if (userInfo$ !== null) {
+  <section class="flex flex-col gap-2 text-3xl bold p-10 lg:my-5 lg:mx-15 rounded bg-base-200">
+    <div class="flex items-center gap-4">
+      <img class="w-24 h-24 rounded-full"
+           src="https://ddragon.leagueoflegends.com/cdn/15.6.1/img/profileicon/{{protagonist.profileIcon}}.png"
+           alt="{{userInfo$.gameName}}">
+      <h1 class="text-5xl">
+        {{ userInfo$?.gameName }}
+        <span class="text-secondary">{{ '#' + userInfo$?.tagLine }}</span>
+      </h1>
+    </div>
+
+    <div class="flex flex-col gap-2 p-4">
+      @for (userInfo of leagueUserInfo$(); track $index) {
+        <div class="flex items-center">
+          <img class="w-36 h-36" [src]="userInfo.tier | rankImages" [alt]="userInfo.tier">
+          <div class="flex flex-col gap-2 p-4">
+            <h1 class="text-4xl text-accent">
+              {{ userInfo.queueType | rankedType }}
+            </h1>
+            <div class="flex gap-4">
+              <h2>
+                Rango: {{ userInfo.tier }} {{ userInfo.rank }}
+              </h2>
+              <h2>
+                Puntos: {{ userInfo.leaguePoints + " lp" }}
+              </h2>
+            </div>
+            <div class="flex gap-4">
+              <h2 class="text-success">Victorias: {{ userInfo.wins }}</h2>
+              <h2 class="text-primary">Derrotas: {{ userInfo.losses }}</h2>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="divider"></div>
+      }
+      <h1 class="text-4xl bold mb-4">
+        Lista de Partidas
+      </h1>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+        @for (match of this.matchList(); track match.metadata.matchId) {
+          <app-match-info [match]="match" [puuid]="puuid()"/>
+        }
+
+      </div>
+      <button class="btn btn-outline w-full hover:btn-success" (click)="chargeMoreMatches()">
+        Ver más partidas
+      </button>
+    </div>
+    <div>
+
+    </div>
+  </section>
+} @else if (buttonHasBeenTouched) {
+  <h1 class="text-2xl my-5 mx-15">No existe un usuario con esos credenciales</h1>
+}
+
+
+
+

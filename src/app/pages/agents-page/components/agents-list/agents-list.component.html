@@ -1,0 +1,60 @@
+<section class="">
+  <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+    <table class="table text-xl w-full">
+      <!-- head -->
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Icono</th>
+        <th>Nombre</th>
+        <th>Rol</th>
+        <th>Nombre de desarrollo</th>
+        <th>Personaje de juego base</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- row 1 -->
+        @for (agente of agents(); track $index) {
+          <tr>
+            <th>{{ $index + 1 }}</th>
+            <td>
+              <img class="cursor-pointer w-[4em] h-[4em]"
+                   [src]="agente.displayIcon"
+                   [alt]="agente.displayName"
+                   routerLink="/agent/{{agente.uuid}}"
+              >
+            </td>
+            <td>
+              <p
+                class="cursor-pointer hover:text-primary transition-colors duration-400"
+                routerLink="/agent/{{agente.uuid}}"
+              >
+                {{ agente.displayName }}
+              </p>
+            </td>
+            <td>
+              <div class="flex gap-4 items-center">
+                <img class="w-10 h-10" [src]="agente.role?.displayIcon" [alt]="agente.displayName">
+                <p>{{agente.role?.displayName }}</p>
+              </div>
+            </td>
+            <td>{{ agente.developerName }}</td>
+            <td>{{agente.isBaseContent | agents}}</td>
+            <td>
+              <a class="btn btn-accent cursor-pointer"
+                 routerLink="/agent/{{agente.uuid}}"
+              >
+                Más información
+              </a>
+            </td>
+
+          </tr>
+        } @empty {
+          <p>No hay agentes disponibles en este momento</p>
+        }
+
+
+      </tbody>
+    </table>
+  </div>
+</section>

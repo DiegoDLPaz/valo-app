@@ -1,0 +1,16 @@
+<div class="flex flex-col mx-10 my-5 gap-5">
+  <h1 class="text-3xl font-bold">Agentes</h1>
+
+  <section class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold">Ordenado Por {{orderBy()}}</h1>
+    <div class="relative ml-auto flex items-center gap-4">
+      <input type="text" placeholder="Buscar por nombre" class="input" #searchText (keyup)="onChange(searchText.value)" />
+      <button class="btn btn-accent" (click)="orderTable('Default')" [class.btn-outline] = "orderBy() !== 'Default'" >Por defecto</button>
+      <button class="btn btn-accent" (click)="orderTable('Nombre')" [class.btn-outline] = "orderBy() !== 'Nombre'" >Nombre</button>
+      <button class="btn btn-info" (click)="orderTable('Rol')" [class.btn-outline] = "orderBy() !== 'Rol'">Rol</button>
+      <button class="btn btn-success" (click)="orderTable('Base')" [class.btn-outline] = "orderBy() !== 'Base'">Personaje Base</button>
+    </div>
+  </section>
+
+  <app-agents-list [agents]="agentsResource.value() ?? []"/>
+</div>

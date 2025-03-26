@@ -1,0 +1,15 @@
+<div class="w-full m-2" id="chart" #chart>
+  <div class="card w-96 shadow-sm pt-5 items-center"  [ngStyle]="{'background-color': '#' + tier().backgroundColor}">
+    <figure>
+      <img
+        [src]="tier().smallIcon"
+        [alt]="tier().divisionName" />
+    </figure>
+    <div class="card-body">
+      <span class="bg-white w-fit p-2 rounded">
+        <h2 class="card-title text-2xl" [ngStyle]="{'color': '#' + tier().color}">{{tier().tierName}}</h2>
+      </span>
+    </div>
+  </div>
+</div>
+

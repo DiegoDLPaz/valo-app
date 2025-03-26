@@ -1,0 +1,91 @@
+<div class="card card-border p-4 bg-base-100 w-full gap-3"
+     [ngStyle]="{'background-color': !protagonist.win ? '#fb3d15' : '#DAF7A6'}">
+  <div class="flex justify-between">
+    <h1 class="text-4xl text-neutral">{{ protagonist.win | victory }}</h1>
+    <h1 class="text-2.5xl text-neutral self-end">{{ match().info.gameStartTimestamp |  timestampToDate }}</h1>
+  </div>
+  <div class="flex gap-4">
+    <img
+      class="w-24 h-24"
+      src="https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/{{protagonist.championName}}.png"
+      [alt]="protagonist.championName">
+    <div>
+      <h1 class="card-title text-2xl">Campeon</h1>
+      <h2 class="text-xl">{{ protagonist.championName }}</h2>
+    </div>
+    <div>
+      <h1 class="card-title text-2xl">KDA</h1>
+      <h2 class="text-xl">
+      <span
+        class="text-accent"
+      >{{ protagonist.kills }}</span>/<span
+        class="text-secondary"
+      >{{ protagonist.deaths }}</span>/<span
+        class="text-accent-content"
+      >{{ protagonist.assists }}</span>
+      </h2>
+    </div>
+    <div>
+      <h1 class="card-title text-2xl">Nivel</h1>
+      <h2 class="text-xl">{{ protagonist.champLevel }}</h2>
+    </div>
+  </div>
+  <div class="flex gap-4">
+    <div>
+      <h1 class="card-title text-2xl">Wards</h1>
+      <h2 class="text-xl">{{ protagonist.wardsPlaced }}</h2>
+    </div>
+    <div>
+      <h1 class="card-title text-2xl">Oro</h1>
+      <h2 class="text-xl">{{ protagonist.goldEarned | goldGained}}</h2>
+    </div>
+    <div>
+      <h1 class="card-title text-2xl">Duración</h1>
+      <h2 class="text-xl">{{ protagonist.timePlayed | timePlayed }}</h2>
+    </div>
+  </div>
+  <div class="flex gap-4">
+    <div>
+      <h1 class="card-title text-2xl">Items</h1>
+      <div class="flex gap-1">
+        <img
+          class="w-12 h-12 rounded"
+          [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + protagonist.item0 + '.png' | itemImage"
+          [alt]="protagonist.championName"
+        />
+
+        <img
+          class="w-12 h-12 rounded"
+          [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + protagonist.item1 + '.png' | itemImage"
+          [alt]="protagonist.championName"
+        />
+        <img
+          class="w-12 h-12 rounded"
+          [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + protagonist.item2 + '.png' | itemImage"
+          [alt]="protagonist.championName"
+        />
+        <img
+          class="w-12 h-12 rounded"
+          [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + protagonist.item3 + '.png' | itemImage"
+          [alt]="protagonist.championName"
+        />
+        <img
+          class="w-12 h-12 rounded"
+          [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + protagonist.item4 + '.png' | itemImage"
+          [alt]="protagonist.championName"
+        />
+        <img
+          class="w-12 h-12 rounded"
+          [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + protagonist.item5 + '.png' | itemImage"
+          [alt]="protagonist.championName"
+        />
+        <img
+          class="w-12 h-12 rounded"
+          [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + protagonist.item6 + '.png' | itemImage"
+          [alt]="protagonist.championName"
+        />
+      </div>
+    </div>
+  </div>
+
+</div>

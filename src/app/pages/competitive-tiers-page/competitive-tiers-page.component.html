@@ -1,0 +1,11 @@
+<div class="flex flex-col mx-10 my-5 gap-5">
+  <h1 class="text-3xl font-bold">Tiers Competitivos</h1>
+
+  <section class="flex flex-row flex-wrap">
+    @for (tier of tiersResource.value()?.tiers; track $index) {
+      @if (!tier.tierName.includes('Unused') && !tier.tierName.includes('UNRANKED')) {
+        <app-tiers-card [tier]="tier"/>
+      }
+    }
+  </section>
+</div>

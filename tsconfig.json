@@ -3,6 +3,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@environment/*": ["./src/environments/*"],
+      "@agents/*": ["./src/app/pages/agents-page/*"],
+      "@buddies/*": ["./src/app/pages/buddies-page/*"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
