@@ -4,6 +4,7 @@ import {environment} from '@environment/environment.development';
 import {Observable, of, tap} from 'rxjs';
 import {LeagueUserResponse, RiotUserResponse} from '../interfaces/user-response.interface';
 import {MatchResponse} from '../interfaces/match-response.interface';
+import {TimelineDto} from '../interfaces/match-timeline-response.interface';
 
 const baseUrl = environment.leagueUrl;
 
@@ -29,7 +30,7 @@ export class LeagueService {
 
     return this.http
       .get<RiotUserResponse>(
-        `https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${username}/${tagline}`,
+        `${baseUrl}/accounts/by-riot-id/${username}/${tagline}`,
         {headers: this.customHeaders}
       )
       .pipe(tap((resp) => this.puuidCache.set(key, resp)));
@@ -87,4 +88,5 @@ export class LeagueService {
     return this.http.get<TimelineDto>(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}/timeline`,
       {headers: this.customHeaders})
   }
+
 }

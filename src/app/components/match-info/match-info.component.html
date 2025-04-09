@@ -56,7 +56,9 @@
       <h1 class="card-title text-2xl">Duración</h1>
       <h2 class="text-xl">{{ protagonist.timePlayed | timePlayed }}</h2>
     </div>
-    <button class="btn btn-primary"
+    <button class="btn btn-accent"
+            [ngStyle]="{'background-color': protagonist.win ? '#5283e9' : '#d41a44'
+     }"
       routerLink="/match/EUW1_{{match().info.gameId}}"
     >
       Más información

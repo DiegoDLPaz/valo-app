@@ -1,18 +1,18 @@
 // Interface for the TimelineDto response object
-interface TimelineDto {
+export interface TimelineDto {
   metadata: MetadataTimeLineDto;
   info: InfoTimeLineDto;
 }
 
 // Interface for the metadata section of the TimelineDto
-interface MetadataTimeLineDto {
+export interface MetadataTimeLineDto {
   dataVersion: string;
   matchId: string;
   participants: string[]; // A list of participant PUUIDs
 }
 
 // Interface for the info section of the TimelineDto
-interface InfoTimeLineDto {
+export interface InfoTimeLineDto {
   endOfGameResult: string;
   frameInterval: number;
   gameId: number;
@@ -21,32 +21,38 @@ interface InfoTimeLineDto {
 }
 
 // Interface for the participant section within the info section of the TimelineDto
-interface ParticipantTimeLineDto {
+export interface ParticipantTimeLineDto {
   participantId: number;
   puuid: string;
 }
 
 // Interface for the frames section within the info section of the TimelineDto
-interface FramesTimeLineDto {
+export interface FramesTimeLineDto {
   events: EventsTimeLineDto[];
   participantFrames: ParticipantFramesDto;
   timestamp: number;
 }
 
 // Interface for the events section within each frame in the TimelineDto
-interface EventsTimeLineDto {
+export interface EventsTimeLineDto {
   timestamp: number;
   realTimestamp: number;
   type: string; // e.g., "DRAGON_KILL", "TOWER_KILL"
+  monsterSubType?: string;
+  monsterType?: string;
+  position?: PositionDto;
+  killerId?: number;
+  killerTeamId?: number;
+  killType?: string;
 }
 
 // Interface for the participantFrames section within each frame
-interface ParticipantFramesDto {
+export interface ParticipantFramesDto {
   [key: number]: ParticipantFrameDto; // Key-value mapping for each participant
 }
 
 // Interface for the individual participant frame
-interface ParticipantFrameDto {
+export interface ParticipantFrameDto {
   championStats: ChampionStatsDto;
   currentGold: number;
   damageStats: DamageStatsDto;
@@ -62,7 +68,7 @@ interface ParticipantFrameDto {
 }
 
 // Interface for the champion stats section within a participant's frame
-interface ChampionStatsDto {
+export interface ChampionStatsDto {
   abilityHaste: number;
   abilityPower: number;
   armor: number;
@@ -91,7 +97,7 @@ interface ChampionStatsDto {
 }
 
 // Interface for the damage stats section within a participant's frame
-interface DamageStatsDto {
+export interface DamageStatsDto {
   magicDamageDone: number;
   magicDamageDoneToChampions: number;
   magicDamageTaken: number;
@@ -107,7 +113,7 @@ interface DamageStatsDto {
 }
 
 // Interface for the position section within a participant's frame
-interface PositionDto {
+export interface PositionDto {
   x: number;
   y: number;
 }
