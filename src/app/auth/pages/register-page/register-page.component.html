@@ -1,0 +1,34 @@
+<div class="flex justify-center items-center min-h-screen">
+  <form [formGroup]="registerForm">
+    <fieldset class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+      <legend class="fieldset-legend">Register</legend>
+
+      <label class="fieldset-label">Fullname</label>
+      <input type="text" class="input border-2" placeholder="Nombre" formControlName="fullName" #fullNameText
+             [class.border-red-500]="formUtils.isValidField('fullName',registerForm)"/>
+      @if (formUtils.isValidField('fullName', registerForm)) {
+        <span class="form-text text-secondary">{{ formUtils.getFieldError('fullName', registerForm) }}</span>
+      }
+
+      <label class="fieldset-label">Email</label>
+      <input type="email" class="input border-2" placeholder="Email" formControlName="email" #emailText
+             [class.border-red-500]="formUtils.isValidField('email',registerForm)"/>
+      @if (formUtils.isValidField('email', registerForm)) {
+        <span class="form-text text-secondary">{{ formUtils.getFieldError('email', registerForm) }}</span>
+      }
+
+      <label class="fieldset-label">Password</label>
+      <input type="password" class="input border-2" placeholder="Password" formControlName="password" #passwordText
+             [class.border-red-500]="formUtils.isValidField('password',registerForm)"/>
+      @if (formUtils.isValidField('password', registerForm)) {
+        <span class="form-text text-secondary">{{ formUtils.getFieldError('password', registerForm) }}</span>
+      }
+
+      <button
+        class="btn btn-neutral mt-4"
+        (click)="onRegister(emailText.value,passwordText.value,fullNameText.value)"
+      >Register</button>
+    </fieldset>
+  </form>
+</div>
+

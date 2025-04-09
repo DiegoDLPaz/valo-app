@@ -1,0 +1,31 @@
+<div class="flex justify-center items-center min-h-screen">
+  <form [formGroup]="loginForm">
+    <fieldset class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+      <legend class="fieldset-legend">Login</legend>
+
+      <label class="fieldset-label">Email</label>
+      <input type="email" class="input border-2" placeholder="Email" formControlName="email" #emailText
+             [class.border-red-500]="formUtils.isValidField('email',loginForm)"/>
+      @if (formUtils.isValidField('email', loginForm)) {
+        <span class="form-text text-secondary">{{ formUtils.getFieldError('email', loginForm) }}</span>
+      }
+
+      <label class="fieldset-label">Password</label>
+      <input type="password" class="input border-2" placeholder="Password" formControlName="password" #passwordText
+             [class.border-red-500]="formUtils.isValidField('password',loginForm)"/>
+      @if (formUtils.isValidField('password', loginForm)) {
+        <span class="form-text text-secondary">{{ formUtils.getFieldError('password', loginForm) }}</span>
+      }
+
+      <p>¿No tienes una cuenta? <a
+        class="text-accent"
+        routerLink="/auth/register"
+      >Prueba aquí</a></p>
+
+      <button
+        class="btn btn-neutral mt-4"
+        (click)="onLogin(emailText.value,passwordText.value)"
+      >Login</button>
+    </fieldset>
+  </form>
+</div>

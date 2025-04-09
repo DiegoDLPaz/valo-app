@@ -1,10 +1,23 @@
 <div class="card card-border p-4 bg-base-100 w-full gap-3"
-     [ngStyle]="{'background-color': !protagonist.win ? '#fb3d15' : '#DAF7A6'}">
+     [ngStyle]="{'background-color': !protagonist.win ? '#fff1f3' : '#ecf2ff',
+                  'border': '5px solid' + (protagonist.win ? '#5283e9' : '#d41a44')
+     }">
   <div class="flex justify-between">
-    <h1 class="text-4xl text-neutral">{{ protagonist.win | victory }}</h1>
-    <h1 class="text-2.5xl text-neutral self-end">{{ match().info.gameStartTimestamp |  timestampToDate }}</h1>
+    <h1 class="text-3xl text-neutral font-bold"
+        [ngStyle]="{'color': !protagonist.win ? '#d41a44' : '#4a7dd6'}"
+    >{{ protagonist.win | victory }}</h1>
+    <h1 class="text-2.5xl text-neutral self-end"
+        [ngStyle]="{'color': !protagonist.win ? '#d41a44' : '#4a7dd6'}"
+    >{{ match().info.gameStartTimestamp |  timestampToDate }}</h1>
   </div>
-  <div class="flex gap-4">
+  <div>
+    <div>
+      <h2 class="text-xl font-bold"
+          [ngStyle]="{'color': !protagonist.win ? '#d41a44' : '#4a7dd6'}"
+      >{{ match().info.queueId | gameType}}</h2>
+    </div>
+  </div>
+  <div class="flex gap-5">
     <img
       class="w-24 h-24"
       src="https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/{{protagonist.championName}}.png"
@@ -30,7 +43,7 @@
       <h2 class="text-xl">{{ protagonist.champLevel }}</h2>
     </div>
   </div>
-  <div class="flex gap-4">
+  <div class="flex items-center gap-5">
     <div>
       <h1 class="card-title text-2xl">Wards</h1>
       <h2 class="text-xl">{{ protagonist.wardsPlaced }}</h2>
@@ -43,6 +56,11 @@
       <h1 class="card-title text-2xl">Duración</h1>
       <h2 class="text-xl">{{ protagonist.timePlayed | timePlayed }}</h2>
     </div>
+    <button class="btn btn-primary"
+      routerLink="/match/EUW1_{{match().info.gameId}}"
+    >
+      Más información
+    </button>
   </div>
   <div class="flex gap-4">
     <div>

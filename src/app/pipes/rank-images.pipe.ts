@@ -19,7 +19,7 @@ export class RankImagesPipe implements PipeTransform {
       case 'PLATINUM':
         return './assets/images/platinum.png'
       case 'EMERALD':
-        return './assets/images/emeraldjfif.jfif'
+        return './assets/images/emerald.png'
       case 'DIAMOND':
         return './assets/images/diamond.png'
       case 'MASTER':

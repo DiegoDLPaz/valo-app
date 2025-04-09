@@ -1,0 +1,145 @@
+@if (matchResource.isLoading()) {
+  <div class="flex items-center justify-center min-h-screen">
+    <span class="loading loading-dots loading-xl"></span>
+  </div>
+} @else {
+
+  <div>
+    <div class="grid grid-cols-3 m-10 p-10 bg-base-200 rounded">
+      <div class="flex flex-col gap-2 ">
+        <h1 class="text-4xl text-[#4a7dd6]">Blue Team</h1>
+        @for (participant of blueTeam; track participant.participantId) {
+          <div tabindex="0" class="flex flex-col">
+            <div class="flex gap-5 items-center">
+              <img
+                class="w-22 h-22 rounded"
+                [alt]="participant.championName"
+                src="https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/{{participant.championName}}.png">
+              <h1 class="text-2xl">
+                {{ participant.riotIdGameName }}
+              </h1>
+              <h1>
+                <span class="text-accent">{{ participant.kills }}</span>/<span class="text-primary">{{ participant.deaths }}</span>/{{ participant.assists }}
+              </h1>
+            </div>
+
+            <div class="mb-2 py-3">
+              <div class="flex gap-1">
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item0 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item1 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item2 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item3 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item4 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item5 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item6 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+              </div>
+            </div>
+          </div>
+        }
+
+      </div>
+
+      <div class="flex flex-col items-center gap-4">
+        <h2 class="text-3xl">{{ blueTeam[0].timePlayed | timePlayed }}</h2>
+        <img
+          class="w-64 h-64 rounded"
+          alt=""
+          [src]="'https://ddragon.leagueoflegends.com/cdn/6.8.1/img/map/map' + matchResource.value()!.info.mapId + '.png'">
+        <h1 class="text-2xl">
+          <span class="text-[#4a7dd6]">{{blueTeamKills}}</span>/<span class="text-[#d41a44]">{{redTeamKills}}</span>
+        </h1>
+      </div>
+
+      <div class="flex flex-col gap-2 items-end">
+        <h1 class="text-4xl text-[#d41a44]">Red Team</h1>
+        @for (participant of redTeam; track participant.participantId) {
+          <div tabindex="0" class="flex flex-col">
+            <div class="flex gap-5 items-center">
+              <img
+                class="w-22 h-22 rounded"
+                [alt]="participant.championName"
+                src="https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/{{participant.championName}}.png">
+              <h1 class="text-2xl">
+                {{ participant.riotIdGameName }}
+              </h1>
+              <h1>
+                <span class="text-accent">{{ participant.kills }}</span>/<span class="text-primary">{{ participant.deaths }}</span>/{{ participant.assists }}
+              </h1>
+            </div>
+
+            <div class="mb-2 py-3">
+              <div class="flex gap-1">
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item0 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item1 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item2 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item3 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item4 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item5 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+                <img
+                  class="w-12 h-12 rounded"
+                  [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant.item6 + '.png' | itemImage"
+                  [alt]="participant.championName"
+                />
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
+
+
+

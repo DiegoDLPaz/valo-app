@@ -1,0 +1,26 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Rol</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (user of users() ; track user.id) {
+        <tr
+          class="hover:bg-base-300 cursor-pointer"
+          routerLink = '/admin/user/{{user.id}}'
+        >
+          <th>{{user.id}}</th>
+          <th>{{user.name}}</th>
+          <th>{{user.email}}</th>
+          <th>{{user.rol}}</th>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

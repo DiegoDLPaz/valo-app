@@ -1,4 +1,4 @@
-import {Component, computed, effect, inject, OnInit, signal} from '@angular/core';
+import {Component,inject, OnInit, signal} from '@angular/core';
 import {AgentsService} from './services/agents.service';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {AgentsListComponent} from './components/agents-list/agents-list.component';

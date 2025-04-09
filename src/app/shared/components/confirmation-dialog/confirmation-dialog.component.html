@@ -1,0 +1,10 @@
+<div class="flex flex-col bg-neutral py-4 px-5 gap-4">
+  <h1 class="text-2xl">¿Estás seguro?</h1>
+  <div >
+    <p class="text-white">¿Seguro que quieres borrar este usuario para siempre?</p>
+  </div>
+  <div mat-dialog-actions>
+    <button class="btn btn-primary" (click)="onCancel()">Cancelar</button>
+    <button class="btn btn-primary ml-2" (click)="onConfirm()">Confirmar</button>
+  </div>
+</div>

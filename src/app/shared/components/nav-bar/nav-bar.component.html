@@ -2,43 +2,62 @@
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
       </div>
-      <ul
-        tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+      <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <!-- Loop through routes for mobile -->
         @for (route of appRoutes; track route.path) {
           <li>
-            <a
-              [routerLink]="route.path"
-              routerLinkActive = "btn-primary"
-            >
-              {{route.title}}
-            </a>
+            <a [routerLink]="route.path" routerLinkActive="btn-primary">{{route.title}}</a>
+          </li>
+        }
+        <!-- Admin Panel link added to dropdown for mobile -->
+        @if (authService.isAdmin()) {
+          <li>
+            <a routerLink="/admin" class="btn text-accent">Admin Panel</a>
           </li>
         }
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl"
-      routerLink="/"
-    ><span
-    class="text-2xl badge badge-accent py-5"
-    >CTNL</span>valo</a>
+    <a class="btn btn-ghost text-xl" routerLink="/">
+      <span class="text-2xl badge badge-accent py-5">CTNL</span>valo
+    </a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
+      <!-- Loop through routes for desktop -->
       @for (route of appRoutes; track route.path) {
         <li>
-          <a
-            [routerLink]="route.path"
-            routerLinkActive = "bg-blue-800"
-          >
-            {{route.title}}
-          </a>
+          <a [routerLink]="route.path" routerLinkActive="bg-blue-800">{{route.title}}</a>
         </li>
       }
     </ul>
   </div>
-  <div class="navbar-end">
+  <div class="navbar-end flex items-center gap-3">
+    <!-- Hide profile icon on small screens -->
+    <div class="hidden lg:block">
+      @if (authService.user()?.profileicon) {
+        <img
+          class="rounded-full w-10 h-10"
+          [src]="converter.convertToBase64(authService.user()?.profileicon!.data)"
+          [alt]="authService.user()?.name">
+      }
+    </div>
+
+    @if (authService.isAdmin()) {
+      <a routerLink="/admin" class="btn text-accent lg:flex hidden">Admin Panel</a>
+    }
+
+    <!-- Show user name and logout buttons if authenticated -->
+    @if (authService.authStatus() === 'authenticated') {
+      <button class="btn btn-ghost" routerLink="/profile">{{ authService.user()?.name }}</button>
+      <button class="btn btn-sm btn-error" (click)="authService.logout()">Salir</button>
+    } @else if (authService.authStatus() === 'not-authenticated') {
+      <a routerLink="/auth/login" class="btn btn-secondary">Login</a>
+    } @else {
+      <a class="btn btn-ghost">...</a>
+    }
   </div>
 </div>

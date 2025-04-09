@@ -1,0 +1,44 @@
+<div class="flex justify-center items-center">
+  <div class="flex flex-col w-200 bg-base-200 p-10 m-5">
+    <div class="flex gap-5">
+      @if (user()?.profileicon) {
+        <img class="rounded w-45 h-45" [src]="converter.convertToBase64(user()?.profileicon!.data)" alt="Profile Icon">
+      }
+      <div class="flex flex-col text-xl">
+        <h1>
+          Nombre: {{ user()?.name }}
+        </h1>
+        <h1>
+          Email: {{ user()?.email }}
+        </h1>
+        <h1>
+          Rol: {{ user()?.rol }}
+        </h1>
+      </div>
+    </div>
+
+    <h1 class="text-3xl underline mt-5">Selecciona o arrastra una imagen</h1>
+
+    <div>
+      <input class="file-input file-input-accent mt-5" type="file" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+
+    <div
+      class="flex drag-drop-container mt-5 border border-accent h-100 w-full justify-center items-center"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+      [ngClass]="{ 'drag-over': isDragOver ,
+                    'bg-accent': isDragOver,
+                    'text-neutral': isDragOver
+
+      }">
+      @if (image){
+        <img [src]="image" alt="Image preview" class="image-preview w-full h-100" />
+      } @else {
+        <p>Arrastra una imagen aquí </p>
+      }
+      <input type="file" (change)="onFileSelected($event)" class="hidden"/>
+    </div>
+  </div>
+</div>

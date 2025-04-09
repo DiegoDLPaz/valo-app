@@ -1,0 +1,40 @@
+<div class="flex flex-col justify-center items-center min-h-screen gap-5">
+  <h1 class="text-3xl text-accent">Actualizar Usuario</h1>
+  <form class="" [formGroup]="userForm">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col">
+        <label class="fieldset-label">Nombre</label>
+        <input type="text" class="input border-2" placeholder="Nombre" formControlName="name" #nameText
+               [class.border-red-500]="formUtils.isValidField('name',userForm)"/>
+        @if (formUtils.isValidField('name', userForm)) {
+          <span class="form-text text-secondary">{{ formUtils.getFieldError('name', userForm) }}</span>
+        }
+      </div>
+
+      <div class="flex flex-col">
+        <label class="fieldset-label">Email</label>
+        <input type="email" class="input border-2" placeholder="Email" formControlName="email" #emailText
+               [class.border-red-500]="formUtils.isValidField('email',userForm)"/>
+        @if (formUtils.isValidField('email', userForm)) {
+          <span class="form-text text-secondary">{{ formUtils.getFieldError('email', userForm) }}</span>
+        }
+      </div>
+
+      <div class="flex flex-col">
+        <label class="fieldset-label">Rol</label>
+        <input type="text" class="input border-2" placeholder="Rol" formControlName="rol" #rolText
+               [class.border-red-500]="formUtils.isValidField('rol',userForm)"/>
+        @if (formUtils.isValidField('rol', userForm)) {
+          <span class="form-text text-secondary">{{ formUtils.getFieldError('rol', userForm) }}</span>
+        }
+      </div>
+
+      <button
+        class="btn btn-accent mt-4"
+        (click)="onUpdate(nameText.value,emailText.value,rolText.value)"
+      >Actualizar</button>
+
+    </div>
+  </form>
+</div>
+

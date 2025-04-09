@@ -21,8 +21,6 @@ export class AgentsService {
   private agentsCache =new Map<string,Agent[]>;
   private agentCache =new Map<string,Agent>;
 
-
-
   getAllAgents(options: Options) : Observable<Agent[]>{
     const {language = "es-ES", isPlayableCharacter = true} = options!
 

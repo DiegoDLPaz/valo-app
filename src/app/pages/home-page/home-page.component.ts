@@ -1,13 +1,14 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject, linkedSignal, OnInit, signal} from '@angular/core';
 import {LeagueService} from '../../services/league.service';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Observable, switchMap, tap} from 'rxjs';
+import {Observable, of, switchMap, tap} from 'rxjs';
 import {LeagueUserResponse, RiotUserResponse} from '../../interfaces/user-response.interface';
 import {RankedTypePipe} from '../../pipes/ranked-type.pipe';
 import {MatchResponse} from '../../interfaces/match-response.interface';
 import {MatchInfoComponent} from '../../components/match-info/match-info.component';
 import {FormUtils} from '../../utils/form-utils';
 import {RankImagesPipe} from '../../pipes/rank-images.pipe';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -20,7 +21,7 @@ import {RankImagesPipe} from '../../pipes/rank-images.pipe';
   templateUrl: './home-page.component.html'
 })
 
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
   leagueService = inject(LeagueService)
   formBuilder = inject(FormBuilder)
   formUtils = FormUtils
@@ -34,12 +35,23 @@ export class HomePageComponent {
   puuid = signal<string>('');
 
   userForm = this.formBuilder.group({
-    userName: ['', Validators.required],
-    tagLine: ['', Validators.required],
+    userName: [localStorage.getItem('userName') || '', Validators.required],
+    tagLine: [localStorage.getItem('tagLine') || '', Validators.required],
   })
+
+  ngOnInit() {
+
+    if(localStorage.getItem('userName') && localStorage.getItem('tagLine')){
+      this.onSubmit(this.userForm.get('userName')?.value!,this.userForm.get('tagLine')?.value!)
+    }
+
+  }
 
   onSubmit(username: string, tagline: string) {
     this.buttonHasBeenTouched = true
+
+    localStorage.setItem('userName', username);
+    localStorage.setItem('tagLine', tagline);
 
     if(this.userForm.invalid){
       this.userForm.markAllAsTouched()

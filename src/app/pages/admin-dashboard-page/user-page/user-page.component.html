@@ -1,0 +1,45 @@
+<div class="flex items-center justify-center min-h-screen">
+  <div class="flex flex-col gap-4 p-4 rounded-xl">
+    <h1 class="text-3xl underline">Información del usuario</h1>
+
+    <div class="text-2xl">
+      <h1>
+        Id: {{userResource.value()?.id}}
+      </h1>
+      <h1>
+        Name: {{userResource.value()?.name}}
+      </h1>
+      <h1>
+        Email: {{userResource.value()?.email}}
+      </h1>
+      <h1>
+        rol: {{userResource.value()?.rol}}
+      </h1>
+    </div>
+
+    <div class="flex gap-4">
+      <button
+        class="btn btn-primary"
+        (click)="onDelete()"
+      >
+        Borrar Usuario
+      </button>
+
+      <button
+        class="btn btn-accent"
+        routerLink= '/admin/user/edit/{{userResource.value()?.id}}'
+      >
+        Editar Usuario
+      </button>
+
+      <button
+        class="btn btn-accent"
+        routerLink = "/admin/users"
+      >
+        Volver a lista
+      </button>
+    </div>
+  </div>
+
+
+</div>

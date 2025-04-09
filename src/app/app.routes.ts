@@ -1,55 +1,117 @@
-import {Routes} from '@angular/router';
-import {HomePageComponent} from './pages/home-page/home-page.component';
-import {AgentsPageComponent} from './pages/agents-page/agents-page.component';
-import {BuddiesPageComponent} from './pages/buddies-page/buddies-page.component';
-import {CompetitiveTiersPageComponent} from './pages/competitive-tiers-page/competitive-tiers-page.component';
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
-import {AgentPageComponent} from './pages/agents-page/agent-page/agent-page.component';
-import {RedirectBackGuard} from './guard/redirect-back.guard';
-import {CtnlPageComponent} from './pages/ctnl-page/ctnl-page.component';
+import { Routes } from '@angular/router';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { AgentsPageComponent } from './pages/agents-page/agents-page.component';
+import { BuddiesPageComponent } from './pages/buddies-page/buddies-page.component';
+import { CompetitiveTiersPageComponent } from './pages/competitive-tiers-page/competitive-tiers-page.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AgentPageComponent } from './pages/agents-page/agent-page/agent-page.component';
+import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
+import { RegisterPageComponent } from './auth/pages/register-page/register-page.component';
+import {AdminDashboardPageComponent} from './pages/admin-dashboard-page/admin-dashboard-page.component';
+import {UsersPageComponent} from './pages/admin-dashboard-page/users-page/users-page.component';
+import {UserPageComponent} from './pages/admin-dashboard-page/user-page/user-page.component';
+import {NotAuthenticatedGuard} from './auth/guards/not-authenticated.guard';
+import {IsAdminGuard} from './auth/guards/is-admin.guard';
+import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
+import {UserEditPageComponent} from './pages/admin-dashboard-page/user-edit-page/user-edit-page.component';
+import {tokenInterceptor} from './auth/interceptors/token.interceptor';
+import {KeyboardPageComponent} from './pages/keyboard-page/keyboard-page.component';
+import {MatchComponent} from './pages/home-page/match/match.component';
 
 export const routes: Routes = [
   {
-    path:'',
+    path: 'auth',
+    children: [
+      {
+        path: 'login',
+        title: 'Login',
+        component: LoginPageComponent
+      },
+      {
+        path: 'register',
+        title: 'Register',
+        component: RegisterPageComponent
+      }
+    ],
+    canMatch: [NotAuthenticatedGuard]
+  },
+  {
+    path: 'profile',
+    title: 'Profile',
+    component: ProfilePageComponent,
+  },
+  {
+    path: 'match/:id',
+    title: 'Match',
+    component: MatchComponent
+  },
+  {
+    path: 'admin',
+    component: AdminDashboardPageComponent,
+    children: [
+      {
+        path: 'users',
+        title: 'Users',
+        component: UsersPageComponent
+      },
+      {
+        path: 'user/:userId',
+        title: 'User',
+        component: UserPageComponent
+      },
+      {
+        path: 'user/edit/:userId',
+        title: 'User Edit',
+        component: UserEditPageComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'users'
+      }
+    ],
+    canMatch: [IsAdminGuard]
+  },
+  {
+    path: '',
     component: DashboardComponent,
     children: [
       {
-        path:'home',
+        path: 'home',
         title: 'Home',
         component: HomePageComponent
       },
       {
-        path:'agents',
+        path: 'agents',
         title: 'Agents',
-        component: AgentsPageComponent
+        component: AgentsPageComponent,
       },
       {
-        path:'agent/:uuid',
+        path: 'agent/:uuid',
         title: 'Agent',
-        component: AgentPageComponent,
-        canActivate: [RedirectBackGuard]
+        component: AgentPageComponent
       },
       {
-        path:'buddies',
+        path: 'buddies',
         title: 'Buddies',
         component: BuddiesPageComponent
       },
       {
-        path:'Competitive-tiers',
+        path: 'competitive-tiers',
         title: 'Competitive Tiers',
         component: CompetitiveTiersPageComponent
       },
       {
-        path:'ctnl',
-        title: 'CTNL',
-        component: CtnlPageComponent
+        path: 'keyboard',
+        title: 'Keyboard',
+        component: KeyboardPageComponent
       },
       {
-        path:'**',
+        path: '**',
         redirectTo: 'home'
       },
     ]
   },
+
   {
     path: '**',
     redirectTo: ''
