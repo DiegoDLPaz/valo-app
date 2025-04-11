@@ -7,6 +7,7 @@ import {addHeaderInterceptor} from './interceptors/add-header.interceptor';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideToastr} from 'ngx-toastr';
 import {tokenInterceptor} from './auth/interceptors/token.interceptor';
+import {provideCharts, withDefaultRegisterables} from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
       //   addHeaderInterceptor
       // ])
     ),
+    provideCharts(withDefaultRegisterables()),
     provideAnimations(),
     provideToastr()
   ]

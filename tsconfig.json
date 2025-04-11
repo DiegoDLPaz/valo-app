@@ -7,7 +7,11 @@
     "paths": {
       "@environment/*": ["./src/environments/*"],
       "@agents/*": ["./src/app/pages/agents-page/*"],
-      "@buddies/*": ["./src/app/pages/buddies-page/*"]
+      "@buddies/*": ["./src/app/pages/buddies-page/*"],
+      "@pipes/*": ["./src/app/pipes/*"],
+      "@interfaces/*": ["./src/app/interfaces/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@services/*": ["./src/app/services/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

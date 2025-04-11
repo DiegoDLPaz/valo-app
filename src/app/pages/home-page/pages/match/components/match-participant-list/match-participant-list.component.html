@@ -1,0 +1,57 @@
+<div tabindex="0" class="flex flex-col cursor-pointer" (click)="onParticipantClicked(participant().puuid)">
+  <div class="flex flex-wrap gap-4 items-center">
+    <img
+      class="w-16 h-16 rounded cursor-pointer"
+      [alt]="participant().championName"
+      [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/' + participant().championName + '.png'"
+    >
+    <h1 class="text-2xl"
+        [class.text-[#e9d700]]="participant().puuid === service.lookedForUser.puuid">
+      {{ participant().riotIdGameName }}
+    </h1>
+    <h1>
+      <span class="text-accent">{{ participant().kills }}</span>/<span
+      class="text-primary">{{ participant().deaths }}</span>/{{ participant().assists }}
+    </h1>
+  </div>
+
+  <div class="mb-2 py-3">
+    <div class="flex gap-1">
+      <img
+        class="w-10 h-10 rounded"
+        [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant().item0 + '.png' | itemImage"
+        [alt]="participant().championName"
+      />
+      <img
+        class="w-10 h-10 rounded"
+        [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant().item1 + '.png' | itemImage"
+        [alt]="participant().championName"
+      />
+      <img
+        class="w-10 h-10 rounded"
+        [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant().item2 + '.png' | itemImage"
+        [alt]="participant().championName"
+      />
+      <img
+        class="w-10 h-10 rounded"
+        [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant().item3 + '.png' | itemImage"
+        [alt]="participant().championName"
+      />
+      <img
+        class="w-10 h-10 rounded"
+        [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant().item4 + '.png' | itemImage"
+        [alt]="participant().championName"
+      />
+      <img
+        class="w-10 h-10 rounded"
+        [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant().item5 + '.png' | itemImage"
+        [alt]="participant().championName"
+      />
+      <img
+        class="w-10 h-10 rounded"
+        [src]="'https://ddragon.leagueoflegends.com/cdn/15.6.1/img/item/' + participant().item6 + '.png' | itemImage"
+        [alt]="participant().championName"
+      />
+    </div>
+  </div>
+</div>

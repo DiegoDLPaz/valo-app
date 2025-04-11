@@ -16,5 +16,6 @@ export class NavBarComponent{
   authService = inject(AuthService)
   converter = new Converter()
 
-  appRoutes  = routes[4].children!.filter(route => route.title !== 'Agent' && route.path !== 'auth')
+  appRoutes  = routes[5].children!
+    .filter(route => route.title !== 'Agent' && route.path !== 'auth' && route.path !== 'champ-info')
 }

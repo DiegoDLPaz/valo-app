@@ -1,8 +1,8 @@
 import {Component, computed, HostListener, inject} from '@angular/core';
-import {AgentsService} from '../services/agents.service';
+import {AgentsService} from '../../services/agents.service';
 import {rxResource, toSignal} from '@angular/core/rxjs-interop';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AbilitiesCarouselComponent} from '../components/abilities-carousel/abilities-carousel.component';
+import {AbilitiesCarouselComponent} from '../../components/abilities-carousel/abilities-carousel.component';
 
 @Component({
   selector: 'app-agent-page',

@@ -1,30 +1,28 @@
-import {Component, inject, linkedSignal, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {LeagueService} from '../../services/league.service';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Observable, of, switchMap, tap} from 'rxjs';
-import {LeagueUserResponse, RiotUserResponse} from '../../interfaces/user-response.interface';
-import {RankedTypePipe} from '../../pipes/ranked-type.pipe';
-import {MatchResponse} from '../../interfaces/match-response.interface';
-import {MatchInfoComponent} from '../../components/match-info/match-info.component';
+import { switchMap, tap} from 'rxjs';
+import {LeagueUserResponse, RiotUserResponse} from '@interfaces/user-response.interface';
+import {MatchResponse} from '@interfaces/match-response.interface';
+import {MatchInfoComponent} from './components/match-info/match-info.component';
 import {FormUtils} from '../../utils/form-utils';
-import {RankImagesPipe} from '../../pipes/rank-images.pipe';
-import {ActivatedRoute, Router} from '@angular/router';
+import {HomeUserinfoComponent} from './components/home-userinfo/home-userinfo.component';
 
 @Component({
   selector: 'app-home-page',
   imports: [
     ReactiveFormsModule,
-    RankedTypePipe,
     MatchInfoComponent,
-    RankImagesPipe
+    HomeUserinfoComponent
   ],
   templateUrl: './home-page.component.html'
 })
 
-export class HomePageComponent implements OnInit{
+export class HomePageComponent implements OnInit {
   leagueService = inject(LeagueService)
   formBuilder = inject(FormBuilder)
   formUtils = FormUtils
+
 
   userInfo$: RiotUserResponse | null = null;
   buttonHasBeenTouched = false
@@ -41,8 +39,13 @@ export class HomePageComponent implements OnInit{
 
   ngOnInit() {
 
-    if(localStorage.getItem('userName') && localStorage.getItem('tagLine')){
-      this.onSubmit(this.userForm.get('userName')?.value!,this.userForm.get('tagLine')?.value!)
+    if (this.leagueService.lookedForUser) {
+      this.onSubmit(this.leagueService.lookedForUser.gameName, this.leagueService.lookedForUser.tagLine)
+      return;
+    }
+
+    if (localStorage.getItem('userName') && localStorage.getItem('tagLine')) {
+      this.onSubmit(this.userForm.get('userName')?.value!, this.userForm.get('tagLine')?.value!)
     }
 
   }
@@ -53,16 +56,23 @@ export class HomePageComponent implements OnInit{
     localStorage.setItem('userName', username);
     localStorage.setItem('tagLine', tagline);
 
-    if(this.userForm.invalid){
+    if (this.userForm.invalid) {
       this.userForm.markAllAsTouched()
       return;
-    }else{
+    } else {
       this.matchList.set([])
       this.pageCount.set(0)
 
-      this.leagueService.getPuuidByNameAndTagline(username, tagline).pipe(
+      this.userForm.patchValue({
+        userName: username,
+        tagLine: tagline
+      })
+
+      this.leagueService.getRiotUserByNameAndTagline(username, tagline).pipe(
         tap(resp => {
           this.userInfo$ = resp;
+
+          this.leagueService.lookedForUser = resp
         }),
         switchMap(resp => {
           this.puuid.set(resp.puuid);
@@ -72,21 +82,20 @@ export class HomePageComponent implements OnInit{
         resp => {
 
           this.leagueUserInfo$.set(resp);
-
           this.updateMatchList()
         }
       );
     }
   }
 
-  chargeMoreMatches(){
-    this.pageCount.set(this.pageCount()+1)
+  chargeMoreMatches() {
+    this.pageCount.set(this.pageCount() + 1)
 
     this.updateMatchList()
   }
 
-  updateMatchList(){
-    this.leagueService.getMatchesIdsByPuuid(this.puuid(),this.pageCount()).pipe(
+  updateMatchList() {
+    this.leagueService.getMatchesIdsByPuuid(this.puuid(), this.pageCount()).pipe(
       tap(matchIds => {
         matchIds.forEach(id => {
 
@@ -101,7 +110,7 @@ export class HomePageComponent implements OnInit{
     ).subscribe();
   }
 
-  get protagonist(){
+  get protagonist() {
     return this.matchList()[0].info.participants.filter
     (participant => participant.puuid === this.puuid())[0]
   }

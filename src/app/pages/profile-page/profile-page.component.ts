@@ -1,10 +1,8 @@
-import {ChangeDetectorRef, Component, computed, inject, OnInit, Signal, signal} from '@angular/core';
+import { Component, computed, inject} from '@angular/core';
 import {AuthService} from '../../auth/services/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {User} from '../../auth/interfaces/user.interface';
-import {rxResource} from '@angular/core/rxjs-interop';
-import {Converter} from '../../shared/utils/converter';
+import {Converter} from '@shared/utils/converter';
 import {NgClass} from '@angular/common';
 
 @Component({

@@ -4,7 +4,7 @@ import { AgentsPageComponent } from './pages/agents-page/agents-page.component';
 import { BuddiesPageComponent } from './pages/buddies-page/buddies-page.component';
 import { CompetitiveTiersPageComponent } from './pages/competitive-tiers-page/competitive-tiers-page.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AgentPageComponent } from './pages/agents-page/agent-page/agent-page.component';
+import { AgentPageComponent } from '@agents/pages/agent-page/agent-page.component';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 import { RegisterPageComponent } from './auth/pages/register-page/register-page.component';
 import {AdminDashboardPageComponent} from './pages/admin-dashboard-page/admin-dashboard-page.component';
@@ -14,9 +14,10 @@ import {NotAuthenticatedGuard} from './auth/guards/not-authenticated.guard';
 import {IsAdminGuard} from './auth/guards/is-admin.guard';
 import {ProfilePageComponent} from './pages/profile-page/profile-page.component';
 import {UserEditPageComponent} from './pages/admin-dashboard-page/user-edit-page/user-edit-page.component';
-import {tokenInterceptor} from './auth/interceptors/token.interceptor';
 import {KeyboardPageComponent} from './pages/keyboard-page/keyboard-page.component';
-import {MatchComponent} from './pages/home-page/match/match.component';
+import {MatchComponent} from './pages/home-page/pages/match/match.component';
+import {ChampionInfoComponent} from './pages/home-page/pages/champion-info/champion-info.component';
+import {ChampPageComponent} from './pages/champ-page/champ-page.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,11 @@ export const routes: Routes = [
     path: 'profile',
     title: 'Profile',
     component: ProfilePageComponent,
+  },
+  {
+    path: 'champ-info/:champId',
+    title: 'Champ',
+    component: ChampionInfoComponent
   },
   {
     path: 'match/:id',
@@ -95,16 +101,26 @@ export const routes: Routes = [
         title: 'Buddies',
         component: BuddiesPageComponent
       },
+      // {
+      //   path: 'competitive-tiers',
+      //   title: 'Competitive Tiers',
+      //   component: CompetitiveTiersPageComponent
+      // },
       {
-        path: 'competitive-tiers',
-        title: 'Competitive Tiers',
-        component: CompetitiveTiersPageComponent
+        path: 'champ',
+        title: 'Champs',
+        component: ChampPageComponent,
       },
       {
-        path: 'keyboard',
-        title: 'Keyboard',
-        component: KeyboardPageComponent
+        path: 'champ-info',
+        title: 'Champ info',
+        component: ChampionInfoComponent,
       },
+      // {
+      //   path: 'keyboard',
+      //   title: 'Keyboard',
+      //   component: KeyboardPageComponent
+      // },
       {
         path: '**',
         redirectTo: 'home'

@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {AppComponent} from './componentes/tiers-card/tiers-card.component';
+import {AppComponent} from './components/tiers-card/tiers-card.component';
 import {TiersService} from './services/tiers.service';
 import {rxResource} from '@angular/core/rxjs-interop';
 

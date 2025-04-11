@@ -1,19 +1,21 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {LeagueService} from '../../../services/league.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LeagueService} from '@services/league.service';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {ItemImagePipe} from '../../../pipes/item-image.pipe';
-import {TimePlayedPipe} from '../../../pipes/time-played.pipe';
-import {DragonTypePipe} from '../../../pipes/dragon-type.pipe';
-import {ParticipantTimeLineDto} from '../../../interfaces/match-timeline-response.interface';
-import {Participant} from '../../../interfaces/match-response.interface';
+import {ItemImagePipe} from '@pipes/item-image.pipe';
+import {TimePlayedPipe} from '@pipes/time-played.pipe';
+import {DragonTypePipe} from '@pipes/dragon-type.pipe';
+import {ParticipantTimeLineDto} from '@interfaces/match-timeline-response.interface';
+import {Participant} from '@interfaces/match-response.interface';
+import {MatchParticipantListComponent} from './components/match-participant-list/match-participant-list.component';
 
 @Component({
   selector: 'app-match',
   imports: [
     ItemImagePipe,
     TimePlayedPipe,
-    DragonTypePipe
+    DragonTypePipe,
+    MatchParticipantListComponent
   ],
   templateUrl: './match.component.html'
 })
@@ -21,6 +23,7 @@ import {Participant} from '../../../interfaces/match-response.interface';
 export class MatchComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute)
   service = inject(LeagueService)
+  router = inject(Router)
 
   matchId = this.activatedRoute.snapshot.paramMap.get('id')
 
@@ -45,6 +48,8 @@ export class MatchComponent implements OnInit {
     loader: () => this.service.getMatchTimeLineById(this.matchId!)
   })
 
+  isLoading = true;
+
   ngOnInit(): void {
     if (this.matchTimelineResource.isLoading()) {
       setTimeout(() => {
@@ -53,6 +58,10 @@ export class MatchComponent implements OnInit {
     } else {
       this.getEvents()
     }
+
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
   }
 
   get blueTeam() {
@@ -120,8 +129,9 @@ export class MatchComponent implements OnInit {
           this.firstBloodSummoner = this.matchResource.value()?.info.participants.find(participant=> participant.puuid === firstBloodMaker.puuid)!
         }
       }
-
     }
   }
+
+
 
 }

@@ -50,27 +50,8 @@
 
     <div class="flex flex-col gap-2 p-4">
       @for (userInfo of leagueUserInfo$(); track $index) {
-        <div class="flex items-center">
-          <img class="w-36 h-36" [src]="userInfo.tier | rankImages" [alt]="userInfo.tier">
-          <div class="flex flex-col gap-2 p-4">
-            <h1 class="text-4xl text-accent">
-              {{ userInfo.queueType | rankedType }}
-            </h1>
-            <div class="flex gap-4">
-              <h2>
-                Rango: {{ userInfo.tier }} {{ userInfo.rank }}
-              </h2>
-              <h2>
-                Puntos: {{ userInfo.leaguePoints + " lp" }}
-              </h2>
-            </div>
-            <div class="flex gap-4">
-              <h2 class="text-success">Victorias: {{ userInfo.wins }}</h2>
-              <h2 class="text-primary">Derrotas: {{ userInfo.losses }}</h2>
-            </div>
-          </div>
-        </div>
 
+        <home-userinfo [userInfo]="userInfo" />
 
         <div class="divider"></div>
       }

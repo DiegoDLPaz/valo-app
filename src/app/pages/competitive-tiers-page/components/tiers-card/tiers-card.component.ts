@@ -1,5 +1,5 @@
 import {Component,input} from "@angular/core";
-import {Tier, TiersEpisode} from '../../interfaces/tiers-response.interface';
+import {Tier} from '../../interfaces/tiers-response.interface';
 import {NgStyle} from '@angular/common';
 
 @Component({

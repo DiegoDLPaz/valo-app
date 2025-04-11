@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {Buddie} from '../interfaces/buddie-response.interface';
+import {Buddie} from '../../interfaces/buddie-response.interface';
 
 @Component({
   selector: 'app-buddie-card',

@@ -1,0 +1,68 @@
+<div class="flex gap-4 justify-center my-5">
+  <select class="select select-primary w-fit" #queue (change)="onSelectChanged(queue.value,tier.value,division.value)">
+    <option value="RANKED_SOLO_5x5" selected>Solo/Duo</option>
+    <option value="RANKED_FLEX_SR">Flex</option>
+  </select>
+
+  <select class="select select-primary w-fit" #tier (change)="onSelectChanged(queue.value,tier.value,division.value)">
+    <option value="IRON" selected>Hierro</option>
+    <option value="BRONZE">Bronce</option>
+    <option value="SILVER">Plata</option>
+    <option value="GOLD">Oro</option>
+    <option value="PLATINUM">Platino</option>
+    <option value="EMERALD">Esmeralda</option>
+    <option value="DIAMOND">Diamante</option>
+    <option value="MASTER">Master</option>
+    <option value="GRANDMASTER">Grand Master</option>
+    <option value="CHALLENGER">Challenger</option>
+  </select>
+
+  <select class="select select-primary w-fit" #division
+          (change)="onSelectChanged(queue.value,tier.value,division.value)">
+    <option value="I" selected>I</option>
+    <option value="II">II</option>
+    <option value="III">III</option>
+    <option value="IV">IV</option>
+  </select>
+</div>
+
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mx-10">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>LP</th>
+      <th>Winrate</th>
+      <th>Victorias</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (champ of champs; track champ.name) {
+        <tr>
+          <td>
+            <div class="flex items-center gap-4">
+              <img
+                class="w-18 h-18"
+                src="https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/{{champ.image.full}}"
+                alt=""
+              >
+              <p>
+                {{champ.name}}
+              </p>
+            </div>
+          </td>
+          <td>
+            {{champ.partype }}
+          </td>
+          <td>
+            {{champ.partype }}
+          </td>
+          <td>
+            {{champ.stats.attackrange}}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,26 @@
+<div class="flex">
+  <select class="select select-primary" #queue (change)="onSelectChanged(queue.value,tier.value,division.value)">
+    <option value="RANKED_SOLO_5x5" selected>Solo/Duo</option>
+    <option value="RANKED_FLEX_SR">Flex</option>
+  </select>
+
+  <select class="select select-primary" #tier (change)="onSelectChanged(queue.value,tier.value,division.value)">
+    <option value="IRON" selected><img src="./assets/images/iron.png"> Hierro</option>
+    <option value="BRONZE">Bronce</option>
+    <option value="SILVER">Plata</option>
+    <option value="GOLD">Oro</option>
+    <option value="PLATINUM">Platino</option>
+    <option value="EMERALD">Esmeralda</option>
+    <option value="DIAMOND">Diamante</option>
+    <option value="MASTER">Master</option>
+    <option value="GRANDMASTER">Grand Master</option>
+    <option value="CHALLENGER">Challenger</option>
+  </select>
+
+  <select class="select select-primary" #division (change)="onSelectChanged(queue.value,tier.value,division.value)">
+    <option value="I" selected>I</option>
+    <option value="II">II</option>
+    <option value="III">III</option>
+    <option value="IV">IV</option>
+  </select>
+</div>

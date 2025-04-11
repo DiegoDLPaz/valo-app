@@ -1,8 +1,8 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {BuddiesService} from './services/buddies.service';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {BuddieCardComponent} from './buddie-card/buddie-card.component';
-import {SearchInputComponent} from '../../shared/components/search-input/search-input.component';
+import {BuddieCardComponent} from '@buddies/components/buddie-card/buddie-card.component';
+import {SearchInputComponent} from '@shared/components/search-input/search-input.component';
 import {Buddie} from './interfaces/buddie-response.interface';
 
 @Component({
